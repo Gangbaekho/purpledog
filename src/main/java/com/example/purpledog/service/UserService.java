@@ -5,6 +5,7 @@ import com.example.purpledog.domain.user.UserRepository;
 import com.example.purpledog.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -12,6 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     public UserCreateResponseDto createUser(UserCreateRequestDto requestDto){
 
         Boolean exists = userRepository.existsByEmail(requestDto.getEmail());
@@ -30,6 +32,7 @@ public class UserService {
         return new UserCreateResponseDto(user);
     }
 
+    @Transactional
     public UserUpdateResponseDto updateUser(UserUpdateRequestDto requestDto){
 
         User user = userRepository.findByEmailAndPassword(requestDto.getEmail(),requestDto.getOldPassword())
@@ -40,6 +43,7 @@ public class UserService {
         return new UserUpdateResponseDto(user);
     }
 
+    @Transactional
     public UserDeleteResponseDto deleteUser(UserDeleteRequestDto requestDto){
 
         User user = userRepository.findByEmailAndPassword(requestDto.getEmail(),requestDto.getPassword())
@@ -50,6 +54,7 @@ public class UserService {
         return new UserDeleteResponseDto(user);
     }
 
+    @Transactional(readOnly = true)
     public UserGetResponseDto getUser(UserGetRequestDto requestDto){
 
         User user = userRepository.findByEmailAndPassword(requestDto.getEmail(),requestDto.getPassword())
@@ -57,6 +62,5 @@ public class UserService {
 
         return new UserGetResponseDto(user);
     }
-
 
 }

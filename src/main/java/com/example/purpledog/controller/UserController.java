@@ -13,7 +13,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("")
-    public UserCreateResponseDto createUser(UserCreateRequestDto requestDto){
+    public UserCreateResponseDto createUser(@RequestBody UserCreateRequestDto requestDto){
 
         return userService.createUser(requestDto);
     }
@@ -21,19 +21,19 @@ public class UserController {
     // email과 password를 통해 user의 정보를 가져옵니다.
     // getMapping을 사용하게 되면 password가 노출되기 때문에 PostMapping으로 대체하여습니다.
     @PostMapping("/info")
-    public UserGetResponseDto getUser(UserGetRequestDto requestDto){
+    public UserGetResponseDto getUser(@RequestBody UserGetRequestDto requestDto){
 
         return userService.getUser(requestDto);
     }
 
     @PutMapping("")
-    public UserUpdateResponseDto updateUser(UserUpdateRequestDto requestDto){
+    public UserUpdateResponseDto updateUser(@RequestBody UserUpdateRequestDto requestDto){
 
         return userService.updateUser(requestDto);
     }
 
     @DeleteMapping("")
-    public UserDeleteResponseDto deleteUser(UserDeleteRequestDto requestDto){
+    public UserDeleteResponseDto deleteUser(@RequestBody UserDeleteRequestDto requestDto){
 
         return userService.deleteUser(requestDto);
     }
